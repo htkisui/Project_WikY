@@ -107,7 +107,19 @@ public class PostController : Controller
     [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
-        var post = await _postService.DeletePostAsync(id);
+        await _postService.DeletePostAsync(id);
         return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Detail(int id)
+    {
+        var post = await _postService.GetPostAsync(id);
+        if (post == null)
+        {
+            return NotFound();
+        }
+        var postViewModel = ConvertPostToPostViewModel(post);
+        return View(postViewModel);
     }
 }

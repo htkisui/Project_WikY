@@ -1,0 +1,10 @@
+﻿@model PostViewModel
+
+<div class="container">
+    <p>@Model.Id</p>
+    <p>@Model.Topic</p>
+    <p>@Model.Author</p>
+    <p>@Model.Content</p>
+    <p>@Model.UpdatedAt</p>
+    <a class="btn btn-primary" asp-controller="Post" asp-action="Detail" asp-route-id="@Model.Id">Details</a>
+</div>

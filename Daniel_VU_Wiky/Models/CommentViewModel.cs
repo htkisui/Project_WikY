@@ -16,5 +16,6 @@ public class CommentViewModel
 
     public DateTime UpdatedAt { get; set; }
 
+    public int PostViewModelId { get; set; }
     public PostViewModel? PostViewModel { get; set; }
 }
