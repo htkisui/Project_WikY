@@ -19,6 +19,7 @@ public class PostController : Controller
         {
             Id = post.Id,
             Author = post.Author,
+            Topic = post.Topic,
             Content = post.Content,
             UpdatedAt = post.UpdatedAt,
         };
@@ -42,11 +43,24 @@ public class PostController : Controller
         return postViewModel;
     }
 
+    private Post ConvertPostViewModelToPost(PostViewModel postViewModel)
+    {
+        var post = new Post()
+        {
+            Id = postViewModel.Id,
+            Author = postViewModel.Author,
+            Topic = postViewModel.Topic,
+            Content = postViewModel.Content,
+        };
+
+        return post;
+    }
+
     [HttpGet]
     public async Task<IActionResult> Index()
     {
         var postViewModels = new List<PostViewModel>();
-        var posts = await _postService.getPostsAsync();
+        var posts = await _postService.GetPostsAsync();
         posts.ForEach(p =>
         {
             var postViewModel = ConvertPostToPostViewModel(p);
@@ -54,5 +68,46 @@ public class PostController : Controller
         });
 
         return View(postViewModels);
+    }
+
+    [HttpGet]
+    public IActionResult Add()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Add(PostViewModel postViewModel)
+    {
+        var post = ConvertPostViewModelToPost(postViewModel);
+        await _postService.AddPostAsync(post);
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var post = await _postService.GetPostAsync(id);
+        if (post == null)
+        {
+            return NotFound();
+        }
+        var postViewModel = ConvertPostToPostViewModel(post);
+        return View(postViewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(PostViewModel postViewModel)
+    {
+        var post = ConvertPostViewModelToPost(postViewModel);
+        await _postService.UpdatePostAsync(post);
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var post = await _postService.DeletePostAsync(id);
+        return RedirectToAction("Index");
     }
 }

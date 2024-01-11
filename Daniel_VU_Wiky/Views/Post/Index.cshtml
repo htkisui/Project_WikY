@@ -3,19 +3,26 @@
     ViewData["Title"] = "Articles";
 }
 
-@foreach(var post in Model)
+<a class="btn btn-primary" asp-action="Add">Create</a>
+
+
+@foreach (var post in Model)
 {
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@post.Id">Edit</a>
+    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@post.Id">Delete</a>
     <p>@post.Topic</p>
     <p>@post.Author</p>
     <p>@post.Content</p>
     <p>@post.UpdatedAt</p>
-    @foreach(var comment in post.CommentViewModels)
+    @if (post.CommentViewModels is not null)
     {
-        <dd><p>@comment.Id</p></dd>
-        <dd><p>@comment.Author</p></dd>
-        <dd><p>@comment.Content</p></dd>
-        <dd><p>@comment.UpdatedAt</p></dd>
-        <dd><hr/></dd>
+        @foreach (var comment in post.CommentViewModels)
+        {
+            <dd><p>@comment.Author</p></dd>
+            <dd><p>@comment.Content</p></dd>
+            <dd><p>@comment.UpdatedAt</p></dd>
+            <dd><hr /></dd>
+        }
     }
-    <hr/>
+    <hr />
 }

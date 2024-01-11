@@ -17,8 +17,28 @@ public class PostService : IPostService
         _postRepository = postRepository;
     }
 
-    public async Task<List<Post>> getPostsAsync()
+    public async Task AddPostAsync(Post post)
+    {
+        await _postRepository.AddPostAsync(post);
+    }
+
+    public async Task<Post?> DeletePostAsync(int id)
+    {
+        return await _postRepository.DeletePostAsync(id);
+    }
+
+    public async Task<Post?> GetPostAsync(int id)
+    {
+        return await _postRepository.GetPostAsync(id);
+    }
+
+    public async Task<List<Post>> GetPostsAsync()
     {
         return await _postRepository.GetPostsAsync();
+    }
+
+    public async Task UpdatePostAsync(Post post)
+    {
+        await _postRepository.UpdatePostAsync(post);
     }
 }
