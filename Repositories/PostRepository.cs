@@ -19,6 +19,8 @@ public class PostRepository : IPostRepository
 
     public async Task AddPostAsync(Post post)
     {
+        post.CreatedAt = DateTime.Now;
+        post.UpdatedAt = DateTime.Now;
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
     }
@@ -52,6 +54,7 @@ public class PostRepository : IPostRepository
             postToUpdate.Topic = post.Topic;
             postToUpdate.Author = post.Author;
             postToUpdate.Content = post.Content;
+            postToUpdate.UpdatedAt = DateTime.Now;
         }
         await _context.SaveChangesAsync();
     }

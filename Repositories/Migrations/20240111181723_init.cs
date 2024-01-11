@@ -36,7 +36,7 @@ namespace Repositories.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Content = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -58,8 +58,8 @@ namespace Repositories.Migrations
                 columns: new[] { "Id", "Author", "Content", "CreatedAt", "Topic", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "Auteur1", "Article1", new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7428), "Theme1", new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7467) },
-                    { 2, "Auteur2", "Article2", new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7469), "Theme2", new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7471) }
+                    { 1, "Auteur1", "Article1", new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4693), "Theme1", new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4744) },
+                    { 2, "Auteur2", "Article2", new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4747), "Theme2", new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4748) }
                 });
 
             migrationBuilder.InsertData(
@@ -67,9 +67,9 @@ namespace Repositories.Migrations
                 columns: new[] { "Id", "Author", "Content", "CreatedAt", "PostId", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "Auteur1", "Commentaire1.1", new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7476), 1, new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7478) },
-                    { 2, "Auteur1", "Commentaire1.2", new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7480), 1, new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7481) },
-                    { 3, "Auteur2", "Commentaire2.1", new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7483), 2, new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7484) }
+                    { 1, "Auteur1", "Commentaire1.1", new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4752), 1, new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4754) },
+                    { 2, "Auteur1", "Commentaire1.2", new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4756), 1, new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4757) },
+                    { 3, "Auteur2", "Commentaire2.1", new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4759), 2, new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4761) }
                 });
 
             migrationBuilder.CreateIndex(
