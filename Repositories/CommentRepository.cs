@@ -1,4 +1,6 @@
-﻿using Repository.Contracts;
+﻿using Entities;
+using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +15,43 @@ public class CommentRepository : ICommentRepository
     public CommentRepository(ApplicationDbContext context)
     {
         _context = context;
+    }
+
+    public async Task AddCommentAsync(Comment comment)
+    {
+        _context.Comments.Add(comment);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<Comment?> DeleteCommentAsync(int id)
+    {
+        var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+        if (comment != null)
+        {
+            _context.Comments.Remove(comment);
+        }
+        await _context.SaveChangesAsync();
+        return comment;
+    }
+
+    public async Task<Comment?> GetCommentAsync(int id)
+    {
+        return await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+    }
+
+    public async Task<List<Comment>> GetCommentsAsync()
+    {
+        return await _context.Comments.ToListAsync();
+    }
+
+    public async Task UpdateCommentAsync(Comment comment)
+    {
+        var commentToUpdate = await _context.Comments.FirstOrDefaultAsync(c => c.Id == comment.Id);
+        if (commentToUpdate != null)
+        {
+            commentToUpdate.Author = comment.Author;
+            commentToUpdate.Content = comment.Content;
+        }
+        await _context.SaveChangesAsync();
     }
 }
