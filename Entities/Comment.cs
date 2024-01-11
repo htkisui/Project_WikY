@@ -11,6 +11,7 @@ public class Comment
     public int Id { get; set; }
 
     [Required]
+    [MaxLength(30)]
     public string? Author { get; set; }
 
     [MaxLength(100)]
@@ -18,4 +19,7 @@ public class Comment
 
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+
+    public int PostId { get; set; }
+    public virtual Post? Post { get; set; }
 }
