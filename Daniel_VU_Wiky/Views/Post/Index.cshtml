@@ -1,0 +1,7 @@
+﻿@model List<PostViewModel>
+@{
+    ViewData["Title"] = "Articles";
+}
+<a class="btn btn-primary" asp-controller="Post" asp-action="Add">Add Post</a>
+<hr />
+<vc:post-list post-view-models="Model"/>

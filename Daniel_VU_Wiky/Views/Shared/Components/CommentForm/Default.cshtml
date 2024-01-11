@@ -1,0 +1,10 @@
+﻿@model CommentViewModel
+
+<form asp-action="@ViewBag.Action">
+    <input name="PostViewModelId" type="hidden" value="@ViewBag.PostId" />
+    <label asp-for="Author">Auteur</label>
+    <input asp-for="Author" />
+    <label asp-for="Content">Contenu</label>
+    <input asp-for="Content" />
+    <input type="submit" />
+</form>

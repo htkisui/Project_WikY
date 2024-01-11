@@ -12,7 +12,7 @@ using Repositories;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240111113946_init")]
+    [Migration("20240111181723_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -35,7 +35,8 @@ namespace Repositories.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Content")
                         .HasMaxLength(100)
@@ -62,27 +63,27 @@ namespace Repositories.Migrations
                             Id = 1,
                             Author = "Auteur1",
                             Content = "Commentaire1.1",
-                            CreatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7476),
+                            CreatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4752),
                             PostId = 1,
-                            UpdatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7478)
+                            UpdatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4754)
                         },
                         new
                         {
                             Id = 2,
                             Author = "Auteur1",
                             Content = "Commentaire1.2",
-                            CreatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7480),
+                            CreatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4756),
                             PostId = 1,
-                            UpdatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7481)
+                            UpdatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4757)
                         },
                         new
                         {
                             Id = 3,
                             Author = "Auteur2",
                             Content = "Commentaire2.1",
-                            CreatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7483),
+                            CreatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4759),
                             PostId = 2,
-                            UpdatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7484)
+                            UpdatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4761)
                         });
                 });
 
@@ -122,18 +123,18 @@ namespace Repositories.Migrations
                             Id = 1,
                             Author = "Auteur1",
                             Content = "Article1",
-                            CreatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7428),
+                            CreatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4693),
                             Topic = "Theme1",
-                            UpdatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7467)
+                            UpdatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4744)
                         },
                         new
                         {
                             Id = 2,
                             Author = "Auteur2",
                             Content = "Article2",
-                            CreatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7469),
+                            CreatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4747),
                             Topic = "Theme2",
-                            UpdatedAt = new DateTime(2024, 1, 11, 12, 39, 46, 130, DateTimeKind.Local).AddTicks(7471)
+                            UpdatedAt = new DateTime(2024, 1, 11, 19, 17, 22, 854, DateTimeKind.Local).AddTicks(4748)
                         });
                 });
 

@@ -19,6 +19,8 @@ public class CommentRepository : ICommentRepository
 
     public async Task AddCommentAsync(Comment comment)
     {
+        comment.CreatedAt = DateTime.Now;
+        comment.UpdatedAt = DateTime.Now;
         _context.Comments.Add(comment);
         await _context.SaveChangesAsync();
     }
@@ -36,12 +38,12 @@ public class CommentRepository : ICommentRepository
 
     public async Task<Comment?> GetCommentAsync(int id)
     {
-        return await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+        return await _context.Comments.Include(c => c.Post).FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<List<Comment>> GetCommentsAsync()
     {
-        return await _context.Comments.ToListAsync();
+        return await _context.Comments.Include(c => c.Post).ToListAsync();
     }
 
     public async Task UpdateCommentAsync(Comment comment)
@@ -51,6 +53,7 @@ public class CommentRepository : ICommentRepository
         {
             commentToUpdate.Author = comment.Author;
             commentToUpdate.Content = comment.Content;
+            commentToUpdate.UpdatedAt = DateTime.Now;
         }
         await _context.SaveChangesAsync();
     }

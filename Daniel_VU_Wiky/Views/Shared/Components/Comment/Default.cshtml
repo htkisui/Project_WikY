@@ -1,0 +1,10 @@
+﻿@model CommentViewModel
+
+<div class="container">
+    <p>@Model.Id</p>
+    <p>@Model.Author</p>
+    <p>@Model.Content</p>
+    <p>@Model.UpdatedAt</p>
+    <a class="btn btn-primary" asp-controller="Comment" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-primary" asp-controller="Comment" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+</div>

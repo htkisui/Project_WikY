@@ -1,0 +1,9 @@
+﻿@model IEnumerable<PostViewModel>
+
+<div class="container">
+    @foreach (var post in Model)
+    {
+        <vc:post-simple post-view-model="post" />
+        <hr />
+    }
+</div>

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<CommentViewModel>
+
+<div class="container">
+    @foreach (var comment in Model)
+    {
+        <vc:comment comment-view-model="comment" />
+        <hr />
+    }
+</div>
