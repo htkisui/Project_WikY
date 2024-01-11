@@ -29,6 +29,8 @@ public class ApplicationDbContext : DbContext
         var c1 = new Comment { Id = 1, Author = "Auteur1", Content = "Commentaire1.1", PostId = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now };
         var c2 = new Comment { Id = 2, Author = "Auteur1", Content = "Commentaire1.2", PostId = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now };
         var c3 = new Comment { Id = 3, Author = "Auteur2", Content = "Commentaire2.1", PostId = 2, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now };
+        
+
 
         modelBuilder.Entity<Post>().HasData(new List<Post> { p1, p2 });
         modelBuilder.Entity<Comment>().HasData(new List<Comment> { c1, c2, c3 });

@@ -1,0 +1,21 @@
+﻿@model List<PostViewModel>
+@{
+    ViewData["Title"] = "Articles";
+}
+
+@foreach(var post in Model)
+{
+    <p>@post.Topic</p>
+    <p>@post.Author</p>
+    <p>@post.Content</p>
+    <p>@post.UpdatedAt</p>
+    @foreach(var comment in post.CommentViewModels)
+    {
+        <dd><p>@comment.Id</p></dd>
+        <dd><p>@comment.Author</p></dd>
+        <dd><p>@comment.Content</p></dd>
+        <dd><p>@comment.UpdatedAt</p></dd>
+        <dd><hr/></dd>
+    }
+    <hr/>
+}

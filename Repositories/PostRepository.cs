@@ -36,12 +36,12 @@ public class PostRepository : IPostRepository
 
     public async Task<Post?> GetPostAsync(int id)
     {
-        return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+        return await _context.Posts.Include(p => p.Comments).FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task<List<Post>> GetPostsAsync()
     {
-        return await _context.Posts.ToListAsync();
+        return await _context.Posts.Include(p => p.Comments).ToListAsync();
     }
 
     public async Task UpdatePostAsync(Post post)

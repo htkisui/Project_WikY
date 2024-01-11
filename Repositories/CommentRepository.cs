@@ -36,12 +36,12 @@ public class CommentRepository : ICommentRepository
 
     public async Task<Comment?> GetCommentAsync(int id)
     {
-        return await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+        return await _context.Comments.Include(c => c.Post).FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<List<Comment>> GetCommentsAsync()
     {
-        return await _context.Comments.ToListAsync();
+        return await _context.Comments.Include(c => c.Post).ToListAsync();
     }
 
     public async Task UpdateCommentAsync(Comment comment)

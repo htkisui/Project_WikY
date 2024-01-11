@@ -1,4 +1,5 @@
-﻿using Repository.Contracts;
+﻿using Entities;
+using Repository.Contracts;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,10 @@ public class PostService : IPostService
     public PostService(IPostRepository postRepository)
     {
         _postRepository = postRepository;
+    }
+
+    public async Task<List<Post>> getPostsAsync()
+    {
+        return await _postRepository.GetPostsAsync();
     }
 }
