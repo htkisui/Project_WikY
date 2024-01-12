@@ -1,4 +1,5 @@
-﻿using Daniel_VU_Wiky.Models;
+﻿using Daniel_VU_Wiky.Converters;
+using Daniel_VU_Wiky.Models;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
@@ -13,49 +14,6 @@ public class PostController : Controller
         _postService = postService;
     }
 
-    private PostViewModel ConvertPostToPostViewModel(Post post)
-    {
-        var postViewModel = new PostViewModel()
-        {
-            Id = post.Id,
-            Author = post.Author,
-            Topic = post.Topic,
-            Content = post.Content,
-            UpdatedAt = post.UpdatedAt,
-        };
-        var commentViewModels = new List<CommentViewModel>();
-        if (post.Comments != null)
-        {
-            foreach (var comment in post.Comments)
-            {
-                var commentViewModel = new CommentViewModel()
-                {
-                    Id = comment.Id,
-                    Author = comment.Author,
-                    Content = comment.Content,
-                    UpdatedAt = comment.UpdatedAt,
-                    PostViewModel = postViewModel
-                };
-                commentViewModels.Add(commentViewModel);
-            }
-        }
-        postViewModel.CommentViewModels = commentViewModels;
-        return postViewModel;
-    }
-
-    private Post ConvertPostViewModelToPost(PostViewModel postViewModel)
-    {
-        var post = new Post()
-        {
-            Id = postViewModel.Id,
-            Author = postViewModel.Author,
-            Topic = postViewModel.Topic,
-            Content = postViewModel.Content,
-        };
-
-        return post;
-    }
-
     [HttpGet]
     public async Task<IActionResult> Index()
     {
@@ -63,7 +21,7 @@ public class PostController : Controller
         var posts = await _postService.GetPostsAsync();
         posts.ForEach(p =>
         {
-            var postViewModel = ConvertPostToPostViewModel(p);
+            var postViewModel = p.ConvertToPostViewModel();
             postViewModels.Add(postViewModel);
         });
 
@@ -79,7 +37,7 @@ public class PostController : Controller
     [HttpPost]
     public async Task<IActionResult> Add(PostViewModel postViewModel)
     {
-        var post = ConvertPostViewModelToPost(postViewModel);
+        var post = postViewModel.ConvertToPost();
         await _postService.AddPostAsync(post);
         return RedirectToAction("Index");
     }
@@ -92,14 +50,14 @@ public class PostController : Controller
         {
             return NotFound();
         }
-        var postViewModel = ConvertPostToPostViewModel(post);
+        var postViewModel = post.ConvertToPostViewModel();
         return View(postViewModel);
     }
 
     [HttpPost]
     public async Task<IActionResult> Edit(PostViewModel postViewModel)
     {
-        var post = ConvertPostViewModelToPost(postViewModel);
+        var post = postViewModel.ConvertToPost();
         await _postService.UpdatePostAsync(post);
         return RedirectToAction("Index");
     }
@@ -119,7 +77,7 @@ public class PostController : Controller
         {
             return NotFound();
         }
-        var postViewModel = ConvertPostToPostViewModel(post);
+        var postViewModel = post.ConvertToPostViewModel();
         return View(postViewModel);
     }
 }

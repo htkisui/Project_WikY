@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel_VU_Wiky.Views.Shared.Components.Comment;
 
-public class CommentViewComponent : ViewComponent
+public class CommentFullViewComponent : ViewComponent
 {
     public async Task<IViewComponentResult> InvokeAsync(CommentViewModel commentViewModel)
     {

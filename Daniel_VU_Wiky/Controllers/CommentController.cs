@@ -1,4 +1,5 @@
-﻿using Daniel_VU_Wiky.Models;
+﻿using Daniel_VU_Wiky.Converters;
+using Daniel_VU_Wiky.Models;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
@@ -15,32 +16,6 @@ public class CommentController : Controller
         _commentService = commentService;
     }
 
-    private Comment ConvertCommentViewModelToComment(CommentViewModel commentViewModel)
-    {
-        var comment = new Comment()
-        {
-            Id = commentViewModel.Id,
-            Author = commentViewModel.Author,
-            Content = commentViewModel.Content,
-            UpdatedAt = commentViewModel.UpdatedAt,
-            PostId = commentViewModel.PostViewModelId
-        };
-        return comment;
-    }
-
-    private CommentViewModel ConvertCommentToCommentViewModel(Comment comment)
-    {
-        var commentViewModel = new CommentViewModel()
-        {
-            Id = comment.Id,
-            Author = comment.Author,
-            Content = comment.Content,
-            UpdatedAt = comment.UpdatedAt,
-            PostViewModelId = comment.PostId
-        };
-        return commentViewModel;
-    }
-
     [HttpGet]
     public IActionResult Add(int postId)
     {
@@ -51,7 +26,7 @@ public class CommentController : Controller
     [HttpPost]
     public async Task<IActionResult> Add(CommentViewModel commentViewModel)
     {
-        var comment = ConvertCommentViewModelToComment(commentViewModel);
+        var comment = commentViewModel.ConvertToComment();
         await _commentService.AddCommentAsync(comment);
         return RedirectToAction("Detail", "Post", new { id = comment.PostId });
     }
@@ -64,7 +39,7 @@ public class CommentController : Controller
         {
             return NotFound();
         }
-        var commentViewModel = ConvertCommentToCommentViewModel(comment);
+        var commentViewModel = comment.ConvertToCommentViewModel();
         ViewBag.PostId = comment.PostId;
         return View(commentViewModel);
     }
@@ -72,7 +47,7 @@ public class CommentController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(CommentViewModel commentViewModel)
     {
-        var comment = ConvertCommentViewModelToComment(commentViewModel);
+        var comment = commentViewModel.ConvertToComment();
         await _commentService.UpdateCommentAsync(comment);
         return RedirectToAction("Detail", "Post", new { id = comment.PostId });
     }
