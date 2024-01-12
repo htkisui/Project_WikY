@@ -21,7 +21,7 @@ public class PostRepository : IPostRepository
     {
         post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
-        _context.Posts.Add(post);
+        await _context.Posts.AddAsync(post);
         await _context.SaveChangesAsync();
     }
 

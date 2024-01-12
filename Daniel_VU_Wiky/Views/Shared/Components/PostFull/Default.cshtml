@@ -10,5 +10,7 @@
     <a class="btn btn-primary" asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
     <hr/>
     <a class="btn btn-primary" asp-controller="Comment" asp-action="Add" asp-route-postId="@Model.Id">Add Comment</a>
+    <vc:comment-form comment-view-model="@null" controller="Comment" action="Add" post-id=@Model.Id />
+    <hr/>
     <vc:comment-list comment-view-models="@Model.CommentViewModels"/>
 </div>

@@ -1,6 +1,6 @@
 ﻿@model PostViewModel
 
-<form asp-action="@ViewBag.Action">
+<form asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action">
     <label asp-for="Topic">Thème</label>
     <input asp-for="Topic" />
     <label asp-for="Author">Auteur</label>

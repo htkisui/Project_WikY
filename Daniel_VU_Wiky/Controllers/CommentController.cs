@@ -31,6 +31,20 @@ public class CommentController : Controller
         return RedirectToAction("Detail", "Post", new { id = comment.PostId });
     }
 
+    [HttpPost]
+    public async Task<IActionResult> AddWithJS(string postId, string author, string content)
+    {
+        var comment = new Comment()
+        {
+            Author = author,
+            Content = content,
+            PostId = int.Parse(postId)
+        };
+        await _commentService.AddCommentAsync(comment);
+        return ViewComponent("CommentFull", comment.ConvertToCommentViewModel());
+    }
+
+
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {

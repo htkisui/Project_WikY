@@ -1,10 +1,17 @@
 ﻿@model CommentViewModel
 
-<form asp-action="@ViewBag.Action">
-    <input name="PostViewModelId" type="hidden" value="@ViewBag.PostId" />
+<form asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action">
+    <input id="comment-postId" name="PostViewModelId" type="hidden" value="@ViewBag.PostId" />
     <label asp-for="Author">Auteur</label>
-    <input asp-for="Author" />
+    <input id="comment-author" asp-for="Author" />
     <label asp-for="Content">Contenu</label>
-    <input asp-for="Content" />
-    <input type="submit" />
+    <input id="comment-content" asp-for="Content" />
+    @if (ViewBag.Action == "Add")
+    {
+        <input type="submit" value="Ajouter(synchrone)" />
+        <input id="commentForm" type="button" value="Ajouter(asynchrone)" />
+    } else
+    {
+        <input type="submit" value="Modifier" />
+    }
 </form>
