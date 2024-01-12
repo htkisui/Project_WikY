@@ -1,7 +1,7 @@
 ﻿@model CommentViewModel
 
 <form asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action">
-    <input id="comment-postId" name="PostViewModelId" type="hidden" value="@ViewBag.PostId" />
+    <input id="comment-postId"name="PostViewModelId" type="hidden" value="@ViewBag.PostId" />
     <label asp-for="Author">Auteur</label>
     <input id="comment-author" asp-for="Author" />
     <label asp-for="Content">Contenu</label>
