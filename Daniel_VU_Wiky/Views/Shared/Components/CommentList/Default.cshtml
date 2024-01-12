@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<CommentViewModel>
 
-<div class="container" id="comment-list">
+<div class="container wiky-comment-list" id="comment-list">
     @foreach (var comment in Model)
     {
         <vc:comment-full comment-view-model="comment" />
-        <hr />
     }
 </div>
