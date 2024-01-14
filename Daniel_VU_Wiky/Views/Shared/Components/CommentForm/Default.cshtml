@@ -1,17 +1,28 @@
 ﻿@model CommentViewModel
 
-<form asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action">
-    <input id="comment-postId"name="PostViewModelId" type="hidden" value="@ViewBag.PostId" />
-    <label asp-for="Author">Auteur</label>
-    <input id="comment-author" asp-for="Author" />
-    <label asp-for="Content">Contenu</label>
-    <input id="comment-content" asp-for="Content" />
-    @if (ViewBag.Action == "Add")
-    {
-        <input type="submit" value="Ajouter(synchrone)" />
-        <input id="commentForm" type="button" value="Ajouter(asynchrone)" />
-    } else
-    {
-        <input type="submit" value="Modifier" />
-    }
-</form>
+<div class="card mb-4">
+    <div class="card-body">
+        <form asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action">
+            <input id="comment-postId" name="PostViewModelId" type="hidden" value="@ViewBag.PostId" />
+            <div class="mb-3 form-floating col-4">
+                <input id="comment-author" asp-for="Author" class="form-control" />
+                <label asp-for="Author">Auteur</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <textarea id="comment-content" asp-for="Content" class="form-control" style="height:100px;"></textarea>
+                <label asp-for="Content">Contenu</label>
+            </div>
+            <div class="d-flex">
+                @if (ViewBag.Action == "Add")
+                {
+                    <input class="btn btn-primary me-4" type="submit" value="Ajouter (Synchrone)" />
+                    <input class="btn btn-secondary me-4" id="commentForm" type="button" value="Ajouter (Asynchrone)" />
+                }
+                else
+                {
+                    <input class="btn btn-primary" type="submit" value="Modifier" />
+                }
+            </div>
+        </form>
+    </div>
+</div>

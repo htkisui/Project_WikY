@@ -18,7 +18,7 @@ public class PostController : Controller
     public async Task<IActionResult> Index()
     {
         var postViewModels = new List<PostViewModel>();
-        var posts = await _postService.GetPostsAsync();
+        var posts = await _postService.GetPostsOrderByUpdatedAtDescAsync();
         posts.ForEach(p =>
         {
             var postViewModel = p.ConvertToPostViewModel();

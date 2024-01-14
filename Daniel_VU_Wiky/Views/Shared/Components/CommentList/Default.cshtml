@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CommentViewModel>
 
-<div class="container wiky-comment-list" id="comment-list">
+<div id="comment-list" class="mb-4">
     @foreach (var comment in Model)
     {
         <vc:comment-full comment-view-model="comment" />

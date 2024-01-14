@@ -12,5 +12,6 @@ public interface IPostService
     Task<Post?> DeletePostAsync(int id); 
     Task<Post?> GetPostAsync(int id);
     Task<List<Post>> GetPostsAsync();
+    Task<List<Post>> GetPostsOrderByUpdatedAtDescAsync();
     Task UpdatePostAsync(Post post);
 }

@@ -46,6 +46,11 @@ public class PostRepository : IPostRepository
         return await _context.Posts.Include(p => p.Comments).ToListAsync();
     }
 
+    public async Task<List<Post>> GetPostsOrderByUpdatedAtDescAsync()
+    {
+        return await _context.Posts.OrderByDescending(p => p.UpdatedAt).Include(p => p.Comments).ToListAsync();
+    }
+
     public async Task UpdatePostAsync(Post post)
     {
         var postToUpdate = await _context.Posts.FirstOrDefaultAsync(p => p.Id == post.Id);
