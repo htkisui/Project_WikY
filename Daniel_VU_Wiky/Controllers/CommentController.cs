@@ -17,31 +17,34 @@ public class CommentController : Controller
     }
 
     [HttpGet]
-    public IActionResult Add(int postId)
+    public IActionResult Add(int postId = 0)
     {
-        ViewBag.PostId = postId;
+        if (postId != 0) ViewBag.PostId = postId;
         return View();
     }
 
     [HttpPost]
     public async Task<IActionResult> Add(CommentViewModel commentViewModel)
     {
+        if (!ModelState.IsValid) return View(commentViewModel);
         var comment = commentViewModel.ConvertToComment();
         await _commentService.AddCommentAsync(comment);
         return RedirectToAction("Detail", "Post", new { id = comment.PostId });
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddWithJS(string postId, string author, string content)
+    public async Task<IActionResult> AddWithJS(string postViewModelId, string author, string content)
     {
-        var comment = new Comment()
+        var commentViewModel = new CommentViewModel()
         {
             Author = author,
             Content = content,
-            PostId = int.Parse(postId)
+            PostViewModelId = int.Parse(postViewModelId),
+            UpdatedAt = DateTime.Now
         };
-        await _commentService.AddCommentAsync(comment);
-        return ViewComponent("CommentFull", comment.ConvertToCommentViewModel());
+        //if (!ModelState.IsValid) return View("Add", commentViewModel.PostViewModelId);
+        await _commentService.AddCommentAsync(commentViewModel.ConvertToComment());
+        return ViewComponent("CommentFull", commentViewModel);
     }
 
 
@@ -61,6 +64,7 @@ public class CommentController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(CommentViewModel commentViewModel)
     {
+        if (!ModelState.IsValid) return View(commentViewModel);
         var comment = commentViewModel.ConvertToComment();
         await _commentService.UpdateCommentAsync(comment);
         return RedirectToAction("Detail", "Post", new { id = comment.PostId });

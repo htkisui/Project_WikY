@@ -26,7 +26,7 @@
             <h4 class="card-title">Commentaires</h4>
         </div>
         <div class="card-body">
-            <vc:comment-form comment-view-model="@null" controller="Comment" action="Add" post-id=@Model.Id />
+            <vc:comment-form comment-view-model="new CommentViewModel() { PostViewModelId = Model.Id }" controller="Comment" action="Add" post-id=@Model.Id />
             <vc:comment-list comment-view-models="@Model.CommentViewModels" />
         </div>
     </div>

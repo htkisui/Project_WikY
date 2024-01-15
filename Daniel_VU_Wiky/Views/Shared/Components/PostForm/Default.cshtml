@@ -6,16 +6,19 @@
             <div class="mb-3 form-floating col-5">
                 <input asp-for="Topic" class="form-control" />
                 <label asp-for="Topic">Thème</label>
+                <span asp-validation-for="Topic" class="text-danger"></span>
             </div>
             <div class="mb-3 form-floating col-5">
                 <input asp-for="Author" class="form-control" />
                 <label asp-for="Author">Auteur</label>
+                <span asp-validation-for="Author" class="text-danger"></span>
             </div>
         </div>
         <div class="card-body">
             <div class="mb-3 form-floating">
                 <textarea asp-for="Content" class="form-control" style="height:300px;"></textarea>
                 <label asp-for="Content">Contenu</label>
+                <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="d-flex">
                 @if (ViewBag.Action == "Add")

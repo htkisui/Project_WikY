@@ -12,6 +12,7 @@ public interface IPostRepository
     Task<Post?> GetPostAsync(int id);
     Task<List<Post>> GetPostsAsync();
     Task<List<Post>> GetPostsOrderByUpdatedAtDescAsync();
+    Task<List<Post>> GetPostsByTopicOrAuthorOrContentAsync(string search);
     Task UpdatePostAsync(Post post);
     Task<Post?> DeletePostAsync(int id);
 }

@@ -37,6 +37,11 @@ public class PostService : IPostService
         return await _postRepository.GetPostsAsync();
     }
 
+    public async Task<List<Post>> GetPostsByTopicOrAuthorOrContentAsync(string search)
+    {
+        return await _postRepository.GetPostsByTopicOrAuthorOrContentAsync(search);
+    }
+
     public async Task<List<Post>> GetPostsOrderByUpdatedAtDescAsync()
     {
         return await _postRepository.GetPostsOrderByUpdatedAtDescAsync();

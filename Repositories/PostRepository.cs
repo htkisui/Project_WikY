@@ -46,6 +46,14 @@ public class PostRepository : IPostRepository
         return await _context.Posts.Include(p => p.Comments).ToListAsync();
     }
 
+    public async Task<List<Post>> GetPostsByTopicOrAuthorOrContentAsync(string search)
+    {
+        return await _context.Posts.Where(p => EF.Functions.Like(p.Topic, $"%{search}%") ||
+                                               EF.Functions.Like(p.Author, $"%{search}%") ||
+                                               EF.Functions.Like(p.Content, $"%{search}%"))
+                                   .Include(p => p.Comments).ToListAsync();
+    }
+
     public async Task<List<Post>> GetPostsOrderByUpdatedAtDescAsync()
     {
         return await _context.Posts.OrderByDescending(p => p.UpdatedAt).Include(p => p.Comments).ToListAsync();

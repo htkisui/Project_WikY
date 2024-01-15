@@ -37,6 +37,7 @@ public class PostController : Controller
     [HttpPost]
     public async Task<IActionResult> Add(PostViewModel postViewModel)
     {
+        if (!ModelState.IsValid) return View(postViewModel);
         var post = postViewModel.ConvertToPost();
         await _postService.AddPostAsync(post);
         return RedirectToAction("Index");
@@ -57,6 +58,7 @@ public class PostController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(PostViewModel postViewModel)
     {
+        if (!ModelState.IsValid) return View(postViewModel);
         var post = postViewModel.ConvertToPost();
         await _postService.UpdatePostAsync(post);
         return RedirectToAction("Index");
@@ -79,5 +81,19 @@ public class PostController : Controller
         }
         var postViewModel = post.ConvertToPostViewModel();
         return View(postViewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Search(string search)
+    {
+        var postViewModels = new List<PostViewModel>();
+        var posts = await _postService.GetPostsByTopicOrAuthorOrContentAsync(search);
+        posts.ForEach(p =>
+        {
+            var postViewModel = p.ConvertToPostViewModel();
+            postViewModels.Add(postViewModel);
+        });
+
+        return View("Index", postViewModels);
     }
 }
