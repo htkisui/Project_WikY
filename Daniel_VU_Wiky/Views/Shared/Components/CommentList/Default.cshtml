@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<CommentViewModel>
 
-<div class="container">
+<div id="comment-list" class="mb-4">
     @foreach (var comment in Model)
     {
-        <vc:comment comment-view-model="comment" />
-        <hr />
+        <vc:comment-full comment-view-model="comment" />
     }
 </div>

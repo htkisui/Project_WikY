@@ -1,0 +1,10 @@
+﻿<div class="card mb-4">
+    <div class="card-body d-flex justify-content-between">
+        <a class="btn btn-primary" asp-controller="Post" asp-action="Add">Ajouter un article</a>
+        <form asp-controller="Post" asp-action="Search" class="d-flex col-6" role="search">
+            <input class="form-control me-2" name="search" type="search" placeholder="Saisir un Thème, un Auteur, un Contenu...'">
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+        </form>
+    </div>
+</div>
+

@@ -1,3 +1,7 @@
 ﻿@model PostViewModel
+@{
+    ViewData["Title"] = "Ajouter un article";
+}
 
-<vc:post-form post-view-model="@Model" action="Add" />
+<h1>Ajouter un article</h1>
+<vc:post-form post-view-model="@Model" controller="Post" action="Add" />

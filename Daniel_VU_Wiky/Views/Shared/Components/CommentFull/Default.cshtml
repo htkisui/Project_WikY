@@ -1,0 +1,19 @@
+﻿@model CommentViewModel
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h6>@Model.Author</h6>
+    </div>
+    <div class="card-body">
+        <p>@Model.Content</p>
+    </div>
+    <div class="card-footer text-body-secondary d-flex justify-content-between">
+        <div>
+            <p class="my-2">Modifié le @Model.UpdatedAt.ToShortDateString() à @Model.UpdatedAt.ToShortTimeString()</p>
+        </div>
+        <div>
+            <a class="btn btn-warning" asp-controller="Comment" asp-action="Edit" asp-route-id="@Model.Id">Editer</a>
+            <a class="btn btn-danger" asp-controller="Comment" asp-action="Delete" asp-route-id="@Model.Id">Supprimer</a>
+        </div>
+    </div>
+</div>

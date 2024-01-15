@@ -1,3 +1,7 @@
 ﻿@model CommentViewModel
+@{
+    ViewData["Title"] = "Editer un commentaire";
+}
 
-<vc:comment-form comment-view-model="@Model" action="Edit" post-id=@ViewBag.PostId />
+<h1>Editer un commentaire</h1>
+<vc:comment-form comment-view-model="@Model" controller="Comment" action="Edit" post-id="@ViewBag.PostId"/>

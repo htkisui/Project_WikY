@@ -21,7 +21,7 @@ public class CommentRepository : ICommentRepository
     {
         comment.CreatedAt = DateTime.Now;
         comment.UpdatedAt = DateTime.Now;
-        _context.Comments.Add(comment);
+        await _context.Comments.AddAsync(comment);
         await _context.SaveChangesAsync();
     }
 

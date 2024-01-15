@@ -21,7 +21,7 @@ public class PostRepository : IPostRepository
     {
         post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
-        _context.Posts.Add(post);
+        await _context.Posts.AddAsync(post);
         await _context.SaveChangesAsync();
     }
 
@@ -44,6 +44,19 @@ public class PostRepository : IPostRepository
     public async Task<List<Post>> GetPostsAsync()
     {
         return await _context.Posts.Include(p => p.Comments).ToListAsync();
+    }
+
+    public async Task<List<Post>> GetPostsByTopicOrAuthorOrContentAsync(string search)
+    {
+        return await _context.Posts.Where(p => EF.Functions.Like(p.Topic, $"%{search}%") ||
+                                               EF.Functions.Like(p.Author, $"%{search}%") ||
+                                               EF.Functions.Like(p.Content, $"%{search}%"))
+                                   .Include(p => p.Comments).ToListAsync();
+    }
+
+    public async Task<List<Post>> GetPostsOrderByUpdatedAtDescAsync()
+    {
+        return await _context.Posts.OrderByDescending(p => p.UpdatedAt).Include(p => p.Comments).ToListAsync();
     }
 
     public async Task UpdatePostAsync(Post post)
