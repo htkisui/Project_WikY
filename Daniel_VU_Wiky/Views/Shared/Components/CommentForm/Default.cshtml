@@ -3,7 +3,14 @@
 <div class="card mb-4">
     <div class="card-body">
         <form asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action">
-            <input id="comment-postId" asp-for="PostViewModelId" type="hidden"/>
+            @if (ViewBag.PostId == null)
+            {
+                <input id="comment-postId" asp-for="PostViewModelId" type="hidden"/>
+            }
+            else
+            {
+                <input id="comment-postId" asp-for="PostViewModelId" type="hidden" value="@ViewBag.PostId" />
+            }
             <div class="mb-3 form-floating col-4">
                 <input id="comment-author" asp-for="Author" class="form-control" />
                 <label asp-for="Author">Auteur</label>
